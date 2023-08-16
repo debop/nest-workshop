@@ -8,6 +8,8 @@ import {
   Param,
   Patch,
   Post,
+  Query,
+  Redirect,
   Res,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
@@ -17,11 +19,13 @@ import { Response } from 'express';
 
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(private readonly usersService: UsersService) {
+  }
 
   @Post()
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.usersService.create(createUserDto);
+  async create(@Body() createUserDto: CreateUserDto): Promise<void> {
+    console.log(createUserDto);
+    // return this.usersService.create(createUserDto);
   }
 
   @Get()
@@ -41,6 +45,18 @@ export class UsersController {
     return this.usersService.findOne(+id);
   }
 
+  // @Header('Custom', 'Test Header')
+  // @Get(':id')
+  // findOneWithHeader(@Param('id') id: string) {
+  //   return this.usersService.findOne(+id);
+  // }
+
+  // @Redirect('https://nestjs.com', 301)
+  // @Get(':id')
+  // findOneRedirection(@Param('id') id: string) {
+  //   return this.usersService.findOne(+id);
+  // }
+
   @HttpCode(202)
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
@@ -50,5 +66,21 @@ export class UsersController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.usersService.remove(+id);
+  }
+
+  @Get('redirect/docs')
+  @Redirect('https://docs.nestjs.com', 302)
+  getDocs(@Query('version') version: string) {
+    if (version && version === '5') {
+      return { url: 'https://docs.nestjs.com/v5/' };
+    }
+  }
+
+  @Delete(':userId/memo/:memoId')
+  deleteUserMemo(
+    @Param('userId') userId: string,
+    @Param('memoId') memoId: string,
+  ): string {
+    return `userId: ${userId}, memoId: ${memoId}`;
   }
 }

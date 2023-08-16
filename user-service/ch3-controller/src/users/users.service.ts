@@ -5,8 +5,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 @Injectable()
 export class UsersService {
   create(createUserDto: CreateUserDto) {
-    const { name, email } = createUserDto;
-    return `유저를 생성했습니다. 이름: ${name}, 이메일: ${email}`;
+    return 'This action adds a new user';
   }
 
   findAll() {
