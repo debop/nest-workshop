@@ -17,4 +17,8 @@ describe('UsersController', () => {
   it('should be defined', () => {
     expect(controller).toBeDefined();
   });
+
+  it('find one by id', () => {
+    expect(controller.findOne('1')).toBeDefined();
+  });
 });
