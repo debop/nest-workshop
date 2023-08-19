@@ -11,7 +11,7 @@ export class AppController {
   }
 
   @Get('/serviceB')
-  getHelloC(): string {
+  getHelloFromServiceB(): string {
     return this.serviceB.getHello();
   }
 }

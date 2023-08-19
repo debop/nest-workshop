@@ -16,7 +16,7 @@ describe('ApiController', () => {
     expect(controller).toBeDefined();
   });
 
-  it('index', () => {
-    expect(controller.index('1')).toEqual('Hello, API 1');
+  it('index with version', () => {
+    expect(controller.index('1')).toBe('Hello, API 1');
   });
 });

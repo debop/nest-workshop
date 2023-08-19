@@ -14,6 +14,7 @@ export class BaseService {
   }
 
   doSomeFuncFromA(): string {
+    console.log('Call BaseService.doSomeFuncFromA()');
     return this.serviceA.getHello();
   }
 }

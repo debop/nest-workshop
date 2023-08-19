@@ -1,9 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ServiceB } from './services/service-B';
-import { ServiceA } from './services/service-A';
-import { BaseService } from './services/base-service';
+import { CommonService } from './common/common.service';
 
 describe('AppController', () => {
   let appController: AppController;
@@ -11,15 +9,19 @@ describe('AppController', () => {
   beforeEach(async () => {
     const app: TestingModule = await Test.createTestingModule({
       controllers: [AppController],
-      providers: [AppService, ServiceB, ServiceA, BaseService],
+      providers: [AppService, CommonService],
     }).compile();
 
     appController = app.get<AppController>(AppController);
   });
 
   describe('root', () => {
-    it('should return "Hello World A!"', () => {
-      expect(appController.getHelloFromServiceB()).toBe('Hello World A!');
+    it('should return "Hello World!"', () => {
+      expect(appController.getHello()).toBe('Hello World!');
+    });
+
+    it('call getCommonHello()', () => {
+      expect(appController.getCommonHello()).toBe('Hello from CommonService');
     });
   });
 });

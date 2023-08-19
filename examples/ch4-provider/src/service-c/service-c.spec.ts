@@ -17,6 +17,6 @@ describe('ServiceC', () => {
   });
 
   it('getHello', () => {
-    expect(provider.getHello()).toEqual('Hello World C!');
+    expect(provider.getHello()).toBe('Hello World C!');
   });
 });

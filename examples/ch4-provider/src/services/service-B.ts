@@ -9,6 +9,7 @@ export class ServiceB extends BaseService {
   // }
 
   getHello(): string {
+    console.log('Call ServiceB.getHello()');
     return this.doSomeFuncFromA();
   }
 }
