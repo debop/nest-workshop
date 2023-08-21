@@ -15,4 +15,8 @@ describe('CommonService', () => {
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
+
+  it('hello', () => {
+    expect(service.hello()).toBe('Hello from CommonService');
+  });
 });
