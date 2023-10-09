@@ -1,4 +1,4 @@
-import { Logger } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { readFile, writeFile } from 'fs/promises';
 import { PostDto } from './blog.model';
 
@@ -10,10 +10,11 @@ export interface BlogRepository {
     updateById(id: string, post: PostDto): Promise<PostDto>;
 }
 
+@Injectable()
 export class BlogFileRepository implements BlogRepository {
     FILE_NAME = './src/blog/blog.data.json';
 
-    private logger = new Logger(BlogFileRepository.name);
+    constructor(private logger: Logger) {}
 
     async getAll(): Promise<PostDto[]> {
         return await this.loadPosts();
@@ -22,6 +23,7 @@ export class BlogFileRepository implements BlogRepository {
     async getById(id: string): Promise<PostDto> {
         const posts = await this.loadPosts();
         const post = posts.find((post) => post.id === id);
+        this.logger.debug(`Get post by id[${id}]: ${JSON.stringify(post)}`);
         return post;
     }
 

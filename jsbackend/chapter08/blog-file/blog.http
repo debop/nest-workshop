@@ -28,5 +28,8 @@ Content-Type: application/json
   "name": "debop"
 }
 
+### 특정 게시글 조회
+GET {{server}}/blog/3
+
 ### 게시글 목록 조회
 GET {{server}}/blog

@@ -5,9 +5,12 @@ import { BlogService } from './blog.service';
 
 @Controller('blog')
 export class BlogController {
-    private readonly logger = new Logger(BlogController.name);
+    // private readonly logger = new Logger(BlogController.name);
 
-    constructor(private readonly blogService: BlogService) {}
+    constructor(
+        private readonly blogService: BlogService,
+        private readonly logger: Logger,
+    ) {}
 
     @Get()
     async getAllPosts() {
@@ -24,7 +27,7 @@ export class BlogController {
     @Get('/:id')
     async getPostById(@Param('id') id: string): Promise<PostDto> {
         const post = await this.blogService.getById(id);
-        this.logger.log(`게시글[${id}] 조회: ${post}`);
+        this.logger.log(`게시글[${id}] 조회: ${JSON.stringify(post)}`);
         return post;
     }
 
