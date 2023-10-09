@@ -27,6 +27,14 @@ describe('AppController (e2e)', () => {
     return request(app.getHttpServer()).get('/users?offset=1&limit=10').expect(200);
   });
 
+  it('/users?offset=1 (GET)', () => {
+    return request(app.getHttpServer()).get('/users?offset=1').expect(200);
+  });
+
+  it('/users?limit=10 (GET)', () => {
+    return request(app.getHttpServer()).get('/users?limit=10').expect(200);
+  });
+
   // Validation -> BadRequestException
   it('/users?offset=abc&limit=abc (GET)', () => {
     return request(app.getHttpServer()).get('/users?offset=abc&limit=abc').expect(400);

@@ -29,7 +29,8 @@ export class UsersController {
     @Query('offset', new DefaultValuePipe(0), ParseIntPipe) offset: number,
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number,
   ) {
-    console.log(`offset=${offset}, limit=${limit}`);
+    let limit2 = limit ?? 10;
+    console.log(`offset=${offset}, limit=${limit2}`);
     return this.usersService.findAll();
   }
 
